@@ -1,13 +1,12 @@
 print("[1]Spela!")
 print("[2]Avbryt")
-start = int(input("Är du redo för att spela? "))
+start = int(input("Är du redå för att spela? "))
 
 import random
 
 slumptal = random.randint(1, 3)
 monster = random.randint(1, 100)
 tressure = random.randint(1, 100)
-jätte = 
 if start == 1:
     print("Spelet startas!")
     
@@ -53,15 +52,10 @@ if start == 1:
 
             if slumptal == 1:
                 print("Monster!")
-                print(monster)
-
-                if monster <= 10:
-                    print()
-
+                #Måste fixa så att monstren slumpas och de olika monstren gör olika mycket skada.
             
             elif slumptal == 2:
                 print("Tressure!")
-                #ska slumpas mellan olika skatter, finns redan en variabel som heter "tressure" som slumpar mellan 100 tal
             
             elif slumptal == 3:
                 print("Trap!")
@@ -112,7 +106,6 @@ elif start == 2:
 
 else:
     print("ogiltligt svar")
-
 
 
 
