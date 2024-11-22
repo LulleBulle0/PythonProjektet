@@ -7,7 +7,14 @@ import random
 slumptal = random.randint(1, 3)
 monster = random.randint(1, 100)
 tressure = random.randint(1, 100)
-jätte = 
+
+
+
+jHP = 40
+tHP = 30
+sHP = 15
+
+
 if start == 1:
     print("Spelet startas!")
     
@@ -61,8 +68,16 @@ if start == 1:
             
             elif slumptal == 2:
                 print("Tressure!")
-                #ska slumpas mellan olika skatter, finns redan en variabel som heter "tressure" som slumpar mellan 100 tal
-            
+                print(tressure)
+                if tressure <= 15:
+                    inventory.append("sheild")
+                
+                elif 15 < tressure <= 30:
+                    inventory.append("healthpotion")
+                
+                elif tressure > 30: 
+                    inventory.append("glass")
+
             elif slumptal == 3:
                 print("Trap!")
                 print(HP - 20)
