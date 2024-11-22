@@ -95,8 +95,18 @@ if(roomChoice in ["1", "2", "3"]):
 
 
 
+       
+
+    
+
+
+
+
 elif start == 2:
     print("Du har valt att avbryta systemet")
 
 else:
     print("ogiltligt svar")
+
+
+
