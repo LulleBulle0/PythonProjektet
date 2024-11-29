@@ -1,28 +1,3 @@
-print("""
-      ████████╗ ██╗  ██╗  ██████╗   ██████╗  ██╗   ██╗  ██████╗ ██╗  ██╗
-      ╚══██╔══╝ ██║  ██║  ██╔══██╗ ██╔═══██╗ ██║   ██║ ██╔════╝ ██║  ██║
-         ██║    ███████║  ██████╔╝ ██║   ██║ ██║   ██║ ██║ ███╗ ███████║
-         ██║    ██╔══██║  ██╔══██╗ ██║   ██║ ██║   ██║ ██║ ╚═█║ ██╔══██║
-         ██║    ██║  ██║  ██║  ██║ ╚██████╔╝ ╚██████╔╝ ╚█████╔╝ ██║  ██║
-         ╚═╝    ╚═╝  ╚═╝  ╚═╝  ╚═╝  ╚═════╝   ╚═════╝   ╚════╝  ╚═╝  ╚═╝
-            
-      ████████╗ ██╗  ██╗ ███████╗
-      ╚══██╔══╝ ██║  ██║ ██╔════╝
-         ██║    ███████║ █████╗  
-         ██║    ██╔══██║ ██╔══╝  
-         ██║    ██║  ██║ ███████╗
-         ╚═╝    ╚═╝  ╚═╝ ╚══════╝
-      
-      ████████╗ ██████╗   ██████╗   ██╗      ██╗       ██████╗  █████╗  ████████╗ ███████╗
-      ╚══██╔══╝ ██╔══██╗ ██╔═══██╗  ██║      ██║      ██╔════╝ ██╔══██╗ ╚══██╔══╝ ██╔════╝
-         ██║    ██████╔╝ ██║   ██║  ██║      ██║      ██║ ███╗ ███████║    ██║    █████╗  
-         ██║    ██╔══██╗ ██║   ██║  ██║      ██║      ██║ ╚═█║ ██║  ██║    ██║    ██╔══╝ 
-         ██║    ██║  ██║ ╚██████╔╝  ███████╗ ███████╗ ╚█████╔╝ ██║  ██║    ██║    ███████╗
-         ╚═╝    ╚═╝  ╚═╝  ╚═════╝   ╚══════╝ ╚══════╝  ╚════╝  ╚═╝  ╚═╝    ╚═╝    ╚══════╝
-
-      """)
-
-
 print("[1]Spela!")
 print("[2]Avbryt")
 start = int(input("Är du redo för att spela? "))
@@ -37,8 +12,6 @@ def Troll():
     print("Monster!")
     print(monster)
 
-    if monster <= 10:
-        print()
 
 def kista():
     print("Tressure!")
@@ -60,6 +33,11 @@ jHP = 40
 tHP = 30
 sHP = 15
 
+print("[1]Spela!")
+print("[2]Avbryt")
+start = int(input("Är du redo för att spela? "))
+
+name = input("Välj namn till din karaktär! ")
 
 if start == 1:
     print("Spelet startas!")
@@ -93,15 +71,23 @@ if start == 1:
     print("---MENY---")
     print("[1] Inventory")
     print("[2] Gå till första dörrarna")
+
     val = int(input("Vad vill du göra? "))
 
     if val == 1:
         print(inventory)
+        if "rustning" in inventory:
+            print("[1] Använd rustning")
+            print("[2] Lämna i inventory")
+            equip_rustning = int(input("Vill du använda din rustning?"))
+            if equip_rustning == 1:
+                inventory.pop("rustning")
+                
         #Om man väljer inventory, så ska man sedan kunna gå vidare till dörrarna
         
     elif val == 2:
         print("Du har kommit fram till dem första dörrarna!")
-        print("Vill du gå in i dörr 1, 2 eller 3?")
+        print("Vll du gå in i dörr 1, 2 eller 3?")
     
 events = ["monster", "kista", "fälla"]
     
@@ -117,6 +103,8 @@ if(roomChoice in ["1", "2", "3"]):
     elif (event == "fälla"):
         fälla()
 
+    
+
 
 
 elif start == 2:
@@ -124,3 +112,8 @@ elif start == 2:
 
 else:
     print("ogiltligt svar")
+
+
+
+
+
