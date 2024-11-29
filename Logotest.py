@@ -1,3 +1,8 @@
+import ASCII_art as ascii
+
+print(ascii.text("Through the trollgate"))
+
+
 print("[1]Spela!")
 print("[2]Avbryt")
 start = int(input("Är du redo för att spela? "))
