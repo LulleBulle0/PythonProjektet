@@ -1,4 +1,6 @@
-
+print("[1]Spela!")
+print("[2]Avbryt")
+start = int(input("Är du redo för att spela? "))
 
 import random
 
@@ -65,7 +67,7 @@ if start == 1:
     
     else:
         print("Ogiltligt svar!")
-    
+
     print("---MENY---")
     print("[1] Inventory")
     print("[2] Gå till första dörrarna")
@@ -82,78 +84,26 @@ if start == 1:
                 inventory.pop("rustning")
                 
         #Om man väljer inventory, så ska man sedan kunna gå vidare till dörrarna
-    elif val == 2:
-        print("Du har kommit fram till dörrarna!")
-        dörr_nummer = int(input("välj mellan dörr nummer 1, 2 eller 3 "))
-        if dörr_nummer == 1:
-            print(slumptal)
-
-            if slumptal == 1:
-                print("Monster!")
-                print(monster)
-
-                if monster <= 10:
-                    print()
-
-            
-            elif slumptal == 2:
-                print("Tressure!")
-                print(tressure)
-                if tressure <= 15:
-                    inventory.append("rustning")
-                    print("rustning!")
-                
-                elif 15 < tressure <= 30:
-                    inventory.append("healthpotion")
-                    print("Healthpotion!")
-                
-                elif tressure > 30: 
-                    inventory.append("glass")
-                    print("glass!")
-
-                    
-
-            elif slumptal == 3:
-                print("Trap!")
-                print(HP - 20)
         
-        if dörr_nummer == 2:
-            print(slumptal)
-
-            if slumptal == 1:
-                print("Monster!")
-                #Måste fixa så att monstren slumpas och de olika monstren gör olika mycket skada.
-            
-            elif slumptal == 2:
-                print("Tressure!")
-            
-            elif slumptal == 3:
-                print("Trap!")
-                print(HP - 20)
-                
-        if dörr_nummer == 3:
-            print(slumptal)
-
-            if slumptal == 1:
-                print("Monster!")
-                #Måste fixa så att monstren slumpas och de olika monstren gör olika mycket skada.
-            
-            elif slumptal == 2:
-                print("Tressure!")
-            
-            elif slumptal == 3:
-                print("Trap!")
-                print(HP - 20)
+    elif val == 2:
+        print("Du har kommit fram till dem första dörrarna!")
+        print("Vll du gå in i dörr 1, 2 eller 3?")
     
+events = ["monster", "kista", "fälla"]
+    
+roomChoice = input("> ")
+    
+if(roomChoice in ["1", "2", "3"]):
+    event = random.choice(events)
+
+    if (event == "monster"):
+        Troll()
+    elif (event == "kista"):
+        kista()
+    elif (event == "fälla"):
+        fälla()
 
     
-
-
-
-       
-
-    
-
 
 
 
