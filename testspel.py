@@ -112,12 +112,16 @@
 
 
 
+
+
 import random
 
 class Player:
     def __init__(self, difficulty):
         self.HP = {"1": 100, "2": 75, "3": 50}.get(difficulty, 0)
         self.inventory = ["Svärd"] if self.HP else []
+        
+
     
     def add_item(self, item):
         self.inventory.append(item)
@@ -132,8 +136,8 @@ class Game:
         self.player = None
 
     def start(self):
-        if input("[1] Spela!\n[2] Avbryt\n> ") == "1":
-            difficulty = input("[1] Lätt\n[2] Medel\n[3] Svårt\n> ")
+        if input("ÄR DU REDO?\n[1] Spela!\n[2] Avbryt\n> ") == "1":
+            difficulty = input("Vilken svårighetsgrad vill du spela på? \n[1] Lätt  100hp\n[2] Medel 75hp\n[3] Svårt 50hp\n> ")
             self.player = Player(difficulty)
             if not self.player.HP:
                 print("Ogiltigt val! Spelet avslutas.")
@@ -144,11 +148,13 @@ class Game:
     
     def main_menu(self):
         while self.player.HP > 0:
-            choice = input("[1] Inventory\n[2] Dörrar\n> ")
+            choice = input("Vad vill du göra? \n[1] Inventory\n[2] Dörrar\n[3] Se din styrka\n> ")
             if choice == "1":
                 print(f"Ditt inventory: {self.player.inventory}")
             elif choice == "2":
                 self.enter_doors()
+            elif choice == "3": 
+                print(f"{self.player.HP}")
             else:
                 print("Ogiltigt val!")
             
@@ -165,7 +171,7 @@ class Game:
             print("Ogiltigt val!")
     
     def monster_event(self):
-        print(f"Ett monster dyker upp! Styrka: {random.randint(1, 100)}")
+        print(f"Det är ett monster! Styrka: {random.randint(1, 100)}")
     
     def chest_event(self):
         loot = random.randint(1, 100)
