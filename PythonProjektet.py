@@ -68,7 +68,7 @@ if start == 1:
     
     else:
         print("Ogiltligt svar!")
-    
+
     print("---MENY---")
     print("[1] Inventory")
     print("[2] Gå till första dörrarna")
@@ -77,9 +77,10 @@ if start == 1:
     if val == 1:
         print(inventory)
         #Om man väljer inventory, så ska man sedan kunna gå vidare till dörrarna
+        
     elif val == 2:
         print("Du har kommit fram till dem första dörrarna!")
-        print("Vll du gå in i dörr 1, 2 eller 3?")
+        print("Vill du gå in i dörr 1, 2 eller 3?")
     
 events = ["monster", "kista", "fälla"]
     
