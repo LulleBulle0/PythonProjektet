@@ -67,77 +67,10 @@ class Game:
     def trap_event(self):
         self.player.take_damage(20)
 
-# # ---------------------------------------------------
-
-# class Item:
-#     item_types = [("Sköld", 15), ("Hälsodryck", 10), ("Svärd", 20)] # "Glass" skulle kunna ge HP
-
-#     def __init__(self, name = "", strength = 0):
-#         self.name = name 
-#         self.strength = strength
-        
-#     def randomize(self):        
-#         random_item = random.choice(self.item_types)
-#         self.name = random_item[0]
-#         self.strength = random_item[1]
-#         return self
-
-#     def to_str(self):
-#         return f"{self.name}\t{self.strength}"
-    
-# class Inventory: 
-#     inventory = []
-    
-#     def add_item(self, item): 
-#         if len(self.inventory) < 5: 
-#             self.inventory.append(item)
-#         else: 
-#             if (isinstance(item, Item)):
-#                 print(f"Du hittade {item.name} men din ryggsäck är full!")
-#                 self.show()
-#                 svar = int(input("Ange siffra för att ersätta eller 0 för att skippa: "))
-#                 if svar < 6 and svar > 0: 
-#                     self.replace_item(svar - 1, item)
-                 
-#     def replace_item(self, item_index, item):
-#         if item_index >= len(self.inventory): 
-#             print("Den platsen finns inte!")
-#         else:
-#             self.inventory[item_index] = item
-
-#     def show(self): 
-#         index = 1
-#         for item in self.inventory:
-#             if isinstance(item, Item):
-#                 print(f"{index}. {item.to_str()}") 
-#                 index += 1
-
-# class Chest: 
-#     def __init__(self): 
-#         self.item = Item().randomize
-#         if (isinstance(self.item, Item)):
-#             print(self.item.to_str())
-    
-# item = Item().randomize()
-# print(f"Pryl = {item.name}, styrka = {item.strength}")
-
-# inventory = Inventory()
-# inventory.add_item(Item().randomize())
-# inventory.add_item(Item().randomize())
-# inventory.add_item(Item().randomize())
-# inventory.add_item(Item().randomize())
-# inventory.add_item(Item().randomize())
-# inventory.add_item(Item().randomize())
-# inventory.show()
-
-# chest = Chest()
-# if (isinstance(chest.item, Item)):
-#     print(chest.item.to_str())
-
-#-----------------------------------------------------------------------------------
 
 
-# Game().start()
+
+
 
 class Item:
     item_types = [("Sköld", 15), ("Hälsodryck", 10), ("Svärd", 20)] # "Glass" skulle kunna ge HP
@@ -152,6 +85,9 @@ class Item:
     
 class Inventory: 
     inventory = []
+
+    def get_items(self): 
+        return self.inventory
     
     def add_item(self, item): 
         if len(self.inventory) < 5: 
@@ -187,6 +123,77 @@ class Inventory:
 class Chest: 
     def __init__(self): 
         self.item = Item()
+
+    
+class Player:
+    def __init__(self, hp, strength, level, inventory):
+        self.hp = hp
+        self.strength = strength
+        self.level = level
+        self.inventory = inventory
+
+    def fight_won(self, monster_name): 
+        self.level += 1
+
+        print(f"Du vann fighten mot {monster_name} och din nya level är {self.level}")
+        
+    def fight_lost(self, monster_name): 
+        self.hp -= 1
+        print(f"Du förlorade fighten mot {monster_name} och din nya HP är: {self.hp}")
+
+    def fight(self, monster): 
+        self.strength
+        bonus_strength = 0
+        if (isinstance(self.inventory, Inventory)):
+            items_in_inventory = self.inventory.get_items()
+            for item in items_in_inventory: 
+                if (isinstance(item, Item)):
+                    bonus_strength += item.strength
+
+            total_strength = self.strength + bonus_strength
+
+            if total_strength > monster.strength: 
+                self.fight_won(monster.name)
+            
+            elif total_strength < monster.strength: 
+                self.fight_lost(monster.name)
+
+            else: 
+                print("Fighten blev oavgjord, monstret försvann! ")
+
+    def got_cought(self, trap): 
+        if(isinstance(trap, Trap)): 
+            self.hp -= trap.damage
+            if trap.name == "Fallnät": 
+                print(f"Du fick ett fallnät över dig, du förlorade {trap.damage} HP! ")
+
+            elif trap.name == "Björnfälla": 
+                print(f"Du snubblade in i en björnfälla, du förlorade {trap.damage} HP! ")
+
+            else: 
+                print(f"Du trillade ner i en varggrop, du förlorade {trap.damage} HP! ")
+            
+
+
+class Trap: 
+    trap_types = [("Fallnät", 1), ("Björnfälla", 3), ("Varggrop", 2)]
+
+    def __init__(self):
+        random_trap = random.choice(self.trap_types)
+        self.name = random_trap[0]
+        self.damage = random_trap[1]
+    
+
+
+class Monster: 
+    monster_types = [("Lilltrollet", 40), ("Jätten", 95 ), ("Dunderklumpen", 80)]
+
+    def __init__(self):
+        random_monster = random.choice(self.monster_types)
+        self.name = random_monster[0]
+        self.strength = random_monster[1]
+
+
     
 print("Test av slumpad pryl (ITEM)")
 print("---------------------------")
