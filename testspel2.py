@@ -3,7 +3,6 @@ import ASCII_art as ascii
 
 print(ascii.text("Through the trollgate"))
 
-
 class Game:
     def __init__(self):
         self.player = None
@@ -70,9 +69,6 @@ class Game:
     def trap_event(self):
         self.player.got_cought(trap = Trap())
 
-
-
-
 ITEM_SWORD = ("Svärd", 20)
 ITEM_HELTH_POTION = ("Hälsodryck", 10)
 ITEM_SHIELD = ("Sköld", 15)
@@ -100,7 +96,7 @@ class Inventory:
         return self.inventory
     
     def add_item(self, item): 
-        if len(self.inventory) < 1: 
+        if len(self.inventory) < 5: 
             # ryggsäck inte full, lägg till pryl
             self.inventory.append(item)
         else: 
@@ -123,8 +119,7 @@ class Inventory:
             
                 self.replace_item(svar - 1, item)
                 self.show()
-                
-                 
+                             
     def replace_item(self, item_index, item):
         if item_index >= len(self.inventory): 
             print("Den platsen finns inte!")
@@ -151,8 +146,7 @@ class Inventory:
 class Chest: 
     def __init__(self): 
         self.item = Item()
-
-    
+  
 class Player:
     def __init__(self, name, hp, strength, level, inventory):
         self.name = name
@@ -222,8 +216,6 @@ class Player:
         print(f"STYRKA:\t{egen_styrka} + {inventory_styrka} = {total_styrka}")
         # print(f"{inventory.show()}")
 
-
-
 class Trap: 
     trap_types = [("Fallnät", 0.5), ("Björnfälla", 2), ("Varggrop", 1)]
 
@@ -232,8 +224,6 @@ class Trap:
         self.name = random_trap[0]
         self.damage = random_trap[1]
     
-
-
 class Monster: 
     monster_types = [("Lilltrollet", 35), ("Jätten", 60 ), ("Dunderklumpen", 90)]
 
@@ -242,9 +232,7 @@ class Monster:
         self.name = random_monster[0]
         self.strength = random_monster[1]
 
-
-
-
+Game().start()
 
 # inventory = Inventory()
 # item_sword = Item().start_item(ITEM_SWORD)
@@ -295,6 +283,3 @@ class Monster:
 # chest = Chest()
 # if (isinstance(chest.item, Item)):
 #     chest.item.show()
-
-Game().start()
-
