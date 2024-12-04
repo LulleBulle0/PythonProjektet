@@ -114,10 +114,10 @@ class Inventory:
                         if 1 <= svar <= 5: 
                             break
                         elif svar == 0: 
-                            print("Inget ersattes, du lämnde kvar skattkistan i skogen! ")
+                            print("\nInget ersattes, du lämnde kvar skattkistan i skogen! ")
                             return
                         else:
-                            print("FEL: Du måste ange en position i ryggsäcken, ett tal mellan 1 och 5! ")
+                            print("FEL: Du måste ange en position i ryggsäcken, ett tal mellan 1 och 5 eller 0 för att skippa! ")
                     except ValueError: 
                         print("FEL: Du måste ange ett heltal! Försök igen ")
             
