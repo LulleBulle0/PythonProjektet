@@ -249,7 +249,7 @@ class Trap:
         self.damage = random_trap[1]
     
 class Monster: 
-    monster_types = [("Lilltrollet", 35), ("Jätten", 60 ), ("Dunderklumpen", 90)]
+    monster_types = [("Lilltrollet", 30), ("Jätten", 45 ), ("Dunderklumpen", 70)]
 
     def __init__(self):
         random_monster = random.choice(self.monster_types)
@@ -257,53 +257,3 @@ class Monster:
         self.strength = random_monster[1]
 
 Game().start()
-
-# inventory = Inventory()
-# item_sword = Item().start_item(ITEM_SWORD)
-# item_helth_potion = Item().start_item(ITEM_HELTH_POTION)
-# inventory.add_item(item_sword)
-# inventory.add_item(item_helth_potion)
-
-
-# player = Player(name = "Pontus", hp = 10, strength = 30, level = 0, inventory = inventory)
-# player.show() 
-
-
-
-
-
-
-# rownumber = 1
-
-# while True: 
-#     trap = Trap()
-#     print(f"{rownumber} {trap.name}\t{trap.damage}")
-#     rownumber = rownumber + 1 
-#     if rownumber >= 10: 
-#         break
-
-# for i in range(1,11): 
-#     monster = Monster()
-#     print(f"{i} {monster.name}\t{monster.strength}")
-
-    
-# print("Test av slumpad pryl (ITEM)")
-# print("---------------------------")
-# item = Item()
-# print(f"Pryl = {item.name}, styrka = {item.strength}")
-
-# print("\nTest av ryggsäck (INVENTORY) med fler än 5 slumpade prylar (ITEMs)")
-# print("------------------------------------------------------------------")
-# inventory = Inventory()
-# inventory.add_item(Item())
-# inventory.add_item(Item())
-# inventory.add_item(Item())
-# inventory.add_item(Item())
-# inventory.add_item(Item())
-# inventory.add_item(Item())
-
-# print("\nTest av kista (CHEST) med slumpad pryl (ITEM)")
-# print("---------------------------------------------")
-# chest = Chest()
-# if (isinstance(chest.item, Item)):
-#     chest.item.show()
