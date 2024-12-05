@@ -33,7 +33,7 @@ class Game:
         print(simple_colors.yellow("HEJ! VÄLKOMMEN TILL THROUGH THE TROLLGATE! "))
         name = input("VAD ÄR DITT NICKNAME? ")
         while True: 
-            self.difficulty = input(f"Vilken svårighetsgrad vill du spela på? \n{simple_colors.green("[1] Lätt 10 hp")}\n{simple_colors.yellow("[2] Medel 8 hp")}\n{simple_colors.red("[3] Svårt 6 hp)")}\n>")
+            self.difficulty = input(f"{simple_colors.yellow("Vilken svårighetsgrad vill du spela på?")} \n{simple_colors.green("[1] Lätt 10 hp")}\n{simple_colors.yellow("[2] Medel 8 hp")}\n{simple_colors.red("[3] Svårt 6 hp")}\n>")
             if self.difficulty == "1":
                 hp = 10
                 break
@@ -54,7 +54,7 @@ class Game:
     def main_menu(self):
         while self.player.hp > 0:
             print("\n----------------------")
-            choice = input("Vad vill du göra? \n[1] Öppna en dörr\n[2] Titta i din ryggsäck\n[3] Se dina egenskaper\n[4] Avsluta\n> ")
+            choice = input(f"{simple_colors.yellow("Vad vill du göra?")} \n[1] Öppna en dörr\n[2] Titta i din ryggsäck\n[3] Se dina egenskaper\n[4] Avsluta\n> ")
             if choice == "1":
                 self.enter_doors()
             elif choice == "2":
@@ -71,7 +71,10 @@ class Game:
                 break
             if self.player.hp <= 0:
                 break    
-        print(simple_colors.yellow("Spelet är över!" if self.player.hp <= 0 else "Tack för att du spelade!"))
+            
+        game_over_text = simple_colors.red(ascii.text("GAME OVER"))
+        thank_you_text = "Tack för att du spelade!"
+        print(game_over_text if self.player.hp <= 0 else thank_you_text)
     
     def enter_doors(self):
         if input("Välj dörr [1] VÄNSTER, [2] MITTEN, [3] HÖGER: ") in ["1", "2", "3"]:
@@ -108,7 +111,7 @@ class Item:
         return(self)
 
     def show(self):
-        print(simple_colors.yellow(f"{self.name}\tSTYRKA: {self.strength}"))
+        print(simple_colors.green(f"{self.name}\tSTYRKA: {self.strength}"))
     
 class Inventory: 
     inventory = []
