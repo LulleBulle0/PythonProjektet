@@ -25,6 +25,9 @@ print(simple_colors.green(ascii.text("Through the trollgate")))
 
 
 class Game:
+    """
+    klassen game sköter spelts gång och har egenskaperna svårighetsgrad och spelare
+    """
     def __init__(self):
         self.player = None
         self.difficulty = None
@@ -100,8 +103,12 @@ ITEM_HELTH_POTION = ("Hälsodryck", 10, 2, 0)
 ITEM_SHIELD = ("Sköld", 15, 0, 0)
 ITEM_TREASURE = ("Guldklimp", 0, 0, 1)
 
-class Item:
-    item_types = [ITEM_SHIELD, ITEM_HELTH_POTION, ITEM_SWORD, ITEM_TREASURE] # "Glass" skulle kunna ge HP
+class Item: 
+    """
+    klassen item är de olika prylarna som finns i skattkistor
+    varje item kan ha egenskaperna namn,styrka, extra HP eller extra level
+    """
+    item_types = [ITEM_SHIELD, ITEM_HELTH_POTION, ITEM_SWORD, ITEM_TREASURE] 
 
     def __init__(self):
         random_item = random.choice(self.item_types)
@@ -121,6 +128,9 @@ class Item:
         print(simple_colors.green(f"{self.name}\tSTYRKA: {self.strength}\t EXTRA HP: {self.hp}\tEXTRA LEVEL: {self.level}"))
     
 class Inventory: 
+    """
+    Klassen Inventory fyller på en lista med items som genereras när du får en kista, styrkan summeras och läggs på spelarens egenskaper
+    """
     inventory = []
 
     def __init__(self, game):
@@ -176,7 +186,6 @@ class Inventory:
     def total_strength(self): 
         total_styrka = 0
         for item in self.inventory: 
-            # if isinstance(item, Item):
             total_styrka += item.strength
         return total_styrka
     
@@ -184,7 +193,10 @@ class Chest:
     def __init__(self): 
         self.item = Item()
   
-class Player:
+class Player: 
+    """
+    Klassen Player håller reda på spelarens namn, hp, styrka, level och inventory
+    """
     def __init__(self, name, hp, strength, level, inventory):
         self.name = name
         self.hp = hp
@@ -196,7 +208,7 @@ class Player:
     def fight_won(self, monster_name): 
         self.level += 1
 
-        print(simple_colors.green(f"Du vann fighten mot {monster_name}! Din nya HP är: {self.hp}"))
+        print(simple_colors.green(f"Du vann fighten mot {monster_name}! Din HP är: {self.hp}"))
         
     def fight_lost(self, monster_name): 
         self.hp -= 1
@@ -257,6 +269,9 @@ class Player:
         # print(f"{inventory.show()}")
 
 class Trap: 
+    """
+    Klassen Trap slumpar och genererar en trap
+    """
     trap_types = [("Fallnät", 0.5), ("Björnfälla", 2), ("Varggrop", 1)]
 
     def __init__(self):
@@ -265,6 +280,9 @@ class Trap:
         self.damage = random_trap[1]
     
 class Monster: 
+    """
+    Klassen monster genererar och slumpar ett monster
+    """
     monster_types = [("Lilltrollet", 35), ("Jätten", 60 ), ("Dunderklumpen", 90)]
 
     def __init__(self):
