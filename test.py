@@ -95,28 +95,30 @@ class Game:
     def trap_event(self):
         self.player.got_cought(trap = Trap())
 
-ITEM_SWORD = ("Svärd", 20, 0)
-ITEM_HELTH_POTION = ("Hälsodryck", 10, 2)
-ITEM_SHIELD = ("Sköld", 15, 0)
-
+ITEM_SWORD = ("Svärd", 20, 0, 0)
+ITEM_HELTH_POTION = ("Hälsodryck", 10, 2, 0)
+ITEM_SHIELD = ("Sköld", 15, 0, 0)
+ITEM_TREASURE = ("Guldklimp", 0, 0, 1)
 
 class Item:
-    item_types = [ITEM_SHIELD, ITEM_HELTH_POTION, ITEM_SWORD] # "Glass" skulle kunna ge HP
+    item_types = [ITEM_SHIELD, ITEM_HELTH_POTION, ITEM_SWORD, ITEM_TREASURE] # "Glass" skulle kunna ge HP
 
     def __init__(self):
         random_item = random.choice(self.item_types)
         self.name = random_item[0]
         self.strength = random_item[1]
         self.hp = random_item[2]
+        self.level = random_item[3]
 
     def start_item(self, item):
         self.name = item[0]
         self.strength = item[1]
         self.hp = item[2]
+        self.level = item[3]
         return(self)
 
     def show(self):
-        print(simple_colors.green(f"{self.name}\tSTYRKA: {self.strength}\t EXTRA HP: {self.hp}"))
+        print(simple_colors.green(f"{self.name}\tSTYRKA: {self.strength}\t EXTRA HP: {self.hp}\tEXTRA LEVEL: {self.level}"))
     
 class Inventory: 
     inventory = []
@@ -237,7 +239,10 @@ class Player:
             print(simple_colors.yellow("\nDU HITTADE EN SKATTKISTA!"))
             print("DEN INNEHÖLL: ", end="")
             chest.item.show()
-            self.inventory.add_item(chest.item)
+            if (chest.item.name == "Guldklimp"):
+                self.level += 1
+            else:
+                self.inventory.add_item(chest.item)
 
     def show(self): 
         egen_styrka = self.strength
