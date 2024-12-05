@@ -1,7 +1,28 @@
+#Installerar simple_Colors! -----------------------------
+import subprocess
+import sys
+
+def install_package(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+try:
+    import simple_colors
+except ImportError:
+    print("simple_colors inte installerat. Installerar nu...")
+    install_package("simple_colors")
+
+#--------------------------------------------------------
+
+import simple_colors
 import random
 import ASCII_art as ascii
+import os
 
-print(ascii.text("Through the trollgate"))
+os.system("cls")
+
+print(simple_colors.green(ascii.text("Through the trollgate")))
+
+
 
 class Game:
     def __init__(self):
@@ -9,10 +30,10 @@ class Game:
         self.difficulty = None
 
     def start(self):
-        print("HEJ! VÄLKOMMEN TILL THROUGH THE TROLLGATE! ")
+        print(simple_colors.yellow("HEJ! VÄLKOMMEN TILL THROUGH THE TROLLGATE! "))
         name = input("VAD ÄR DITT NICKNAME? ")
         while True: 
-            self.difficulty = input("Vilken svårighetsgrad vill du spela på? \n[1] Lätt  10 hp\n[2] Medel 8 hp\n[3] Svårt 6 hp\n> ")
+            self.difficulty = input(f"Vilken svårighetsgrad vill du spela på? \n{simple_colors.green("[1] Lätt 10 hp")}\n{simple_colors.yellow("[2] Medel 8 hp")}\n{simple_colors.red("[3] Svårt 6 hp)")}\n>")
             if self.difficulty == "1":
                 hp = 10
                 break
@@ -23,7 +44,7 @@ class Game:
                 hp = 6
                 break
             else: 
-                print("Ogiltigt svar!")
+                print(simple_colors.red("Ogiltigt svar!"))
 
         self.player = Player(name = name, hp = hp, strength = 30, level = 0, inventory = Inventory())
 
@@ -33,7 +54,7 @@ class Game:
     def main_menu(self):
         while self.player.hp > 0:
             print("\n----------------------")
-            choice = input("Vad vill du göra? \n[1] Dörrar\n[2] Inventory\n[3] Se dina egenskaper\n[4] Avsluta\n> ")
+            choice = input("Vad vill du göra? \n[1] Öppna en dörr\n[2] Titta i din ryggsäck\n[3] Se dina egenskaper\n[4] Avsluta\n> ")
             if choice == "1":
                 self.enter_doors()
             elif choice == "2":
@@ -46,11 +67,11 @@ class Game:
                 print("Ogiltigt val!")
 
             if self.player.level >= 10: 
-                print("Grattis!!! Du klarade spelet!")
+                print(simple_colors.yellow("Grattis!!! Du klarade spelet!"))
                 break
             if self.player.hp <= 0:
                 break    
-        print("Spelet är över!" if self.player.hp <= 0 else "Tack för att du spelade!")
+        print(simple_colors.yellow("Spelet är över!" if self.player.hp <= 0 else "Tack för att du spelade!"))
     
     def enter_doors(self):
         if input("Välj dörr [1] VÄNSTER, [2] MITTEN, [3] HÖGER: ") in ["1", "2", "3"]:
@@ -59,7 +80,7 @@ class Game:
             print("Ogiltigt val!")
     
     def monster_event(self):
-        print("\nDet är ett monster!")
+        print(simple_colors.red("\nDet är ett monster!"))
         self.player.fight(monster = Monster())
     
     def chest_event(self):
@@ -87,7 +108,7 @@ class Item:
         return(self)
 
     def show(self):
-        print(f"{self.name}\tSTYRKA: {self.strength}")
+        print(simple_colors.yellow(f"{self.name}\tSTYRKA: {self.strength}"))
     
 class Inventory: 
     inventory = []
@@ -113,22 +134,22 @@ class Inventory:
                             print("\nInget ersattes, du lämnde kvar skattkistan i skogen! ")
                             return
                         else:
-                            print("FEL: Du måste ange en position i ryggsäcken, ett tal mellan 1 och 5 eller 0 för att skippa! ")
+                            print(simple_colors.red("FEL: Du måste ange en position i ryggsäcken, ett tal mellan 1 och 5 eller 0 för att skippa! "))
                     except ValueError: 
-                        print("FEL: Du måste ange ett heltal! Försök igen ")
+                        print(simple_colors.red("FEL: Du måste ange ett heltal! Försök igen "))
             
                 self.replace_item(svar - 1, item)
                 self.show()
                              
     def replace_item(self, item_index, item):
         if item_index >= len(self.inventory): 
-            print("Den platsen finns inte!")
+            print(simple_colors.red("Den platsen finns inte!"))
         else:
             self.inventory[item_index] = item
 
     def show(self): 
         index = 0
-        print("\nRYGGSÄCK:")
+        print(simple_colors.yellow("\nRYGGSÄCK:"))
         print("---------")
         for item in self.inventory:
             if isinstance(item, Item):
@@ -159,11 +180,11 @@ class Player:
     def fight_won(self, monster_name): 
         self.level += 1
 
-        print(f"Du vann fighten mot {monster_name} och din nya level är {self.level}")
+        print(simple_colors.green(f"Du vann fighten mot {monster_name} och din nya level är {self.level}"))
         
     def fight_lost(self, monster_name): 
         self.hp -= 1
-        print(f"Du förlorade fighten mot {monster_name} och din nya HP är: {self.hp}")
+        print(simple_colors.yellow(f"Du förlorade fighten mot {monster_name} och din nya HP är: {self.hp}"))
 
     def fight(self, monster): 
         self.strength
@@ -183,23 +204,23 @@ class Player:
                 self.fight_lost(monster.name)
 
             else: 
-                print("Fighten blev oavgjord, monstret försvann! ")
+                print(simple_colors.yellow("Fighten blev oavgjord, monstret försvann! "))
 
     def got_cought(self, trap): 
         if(isinstance(trap, Trap)): 
             self.hp -= trap.damage
             if trap.name == "Fallnät": 
-                print(f"\nDu fick ett fallnät över dig, du förlorade {trap.damage} HP! ")
+                print(simple_colors.yellow(f"\nDu fick ett fallnät över dig, du förlorade {trap.damage} HP! "))
 
             elif trap.name == "Björnfälla": 
-                print(f"\nDu snubblade in i en björnfälla, du förlorade {trap.damage} HP! ")
+                print(simple_colors.yellow(f"\nDu snubblade in i en björnfälla, du förlorade {trap.damage} HP! "))
 
             else: 
-                print(f"\nDu trillade ner i en varggrop, du förlorade {trap.damage} HP! ")
+                print(simple_colors.yellow(f"\nDu trillade ner i en varggrop, du förlorade {trap.damage} HP! "))
 
     def found_chest(self, chest): 
         if(isinstance(chest, Chest)): 
-            print("\nDU HITTADE EN SKATTKISTA!")
+            print(simple_colors.yellow("\nDU HITTADE EN SKATTKISTA!"))
             print("DEN INNEHÖLL: ", end="")
             chest.item.show()
             self.inventory.add_item(chest.item)
@@ -209,7 +230,7 @@ class Player:
         inventory_styrka = self.inventory.total_strength()
         total_styrka = egen_styrka + inventory_styrka
         print(f"\nHEJ {self.name}!")
-        print("\nDINA EGENSKAPER")
+        print(simple_colors.yellow("\nDINA EGENSKAPER"))
         print("---------------")
         print(f"HP:\t{self.hp}")
         print(f"LEVEL:\t{self.level}")
